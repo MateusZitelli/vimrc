@@ -54,3 +54,23 @@ endfunction
 au FileType coffee call CoffeeScriptFold()
 
 au FileType gitcommit call setpos('.', [0, 1, 1, 0])
+""""""""""""""""""""""""""""""
+" => Smalltalk section
+"""""""""""""""""""""""""""""""
+" Set configs for smalltalk
+au FileType st call FT_st()
+
+function FT_st()
+  set tabstop=2
+  set softtabstop=2
+  set shiftwidth=2
+  set noexpandtab
+  retab 2
+endfunction
+
+""""""""""""""""""""""""""""""
+" => Misc section
+"""""""""""""""""""""""""""""""
+" Force setting for *.md files. More info: https://github.com/tpope/vim-markdown
+autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+au BufRead,BufNewFile /opt/nginx/* if &ft == '' | setfiletype nginx | endif 
