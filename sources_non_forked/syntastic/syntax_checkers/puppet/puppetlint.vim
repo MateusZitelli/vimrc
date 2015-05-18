@@ -10,7 +10,7 @@
 "
 "============================================================================
 
-if exists('g:loaded_syntastic_puppet_puppetlint_checker')
+if exists("g:loaded_syntastic_puppet_puppetlint_checker")
     finish
 endif
 let g:loaded_syntastic_puppet_puppetlint_checker = 1
@@ -19,10 +19,13 @@ let s:save_cpo = &cpo
 set cpo&vim
 
 function! SyntaxCheckers_puppet_puppetlint_IsAvailable() dict
-    if !executable(self.getExec())
+    call self.log("executable('puppet') = " . executable('puppet') . ', ' .
+        \ "executable(" . string(self.getExec()) . ") = " . executable(self.getExec()))
+    if !executable('puppet') || !executable(self.getExec())
         return 0
     endif
-    return syntastic#util#versionIsAtLeast(self.getVersion(), [0, 2])
+    let ver = self.getVersion(self.getExecEscaped() . ' --version 2>' . syntastic#util#DevNull())
+    return syntastic#util#versionIsAtLeast(ver, [0, 1, 10])
 endfunction
 
 function! SyntaxCheckers_puppet_puppetlint_GetLocList() dict

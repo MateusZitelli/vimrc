@@ -99,8 +99,9 @@ endfunction
 
 function! s:parser_expr() dict abort
     let str = join(self.text('`', 1))
+    let ret = eval(str)
     call self.same('`')
-    return snipmate#util#eval(str)
+    return type(ret) == type('') ? ret : string(ret)
 endfunction
 
 function! s:parser_text(...) dict abort

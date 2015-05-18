@@ -1,14 +1,15 @@
 #resource controller
 snippet l_rsc "Laravel resource controller" b
 /*!
- * \class       $1
+ * \class       ${1:`!v expand('%:t:r')`}
  *
- * \author      ${3:`!v g:snips_author`}
+ * \author      ${2:`!v g:snips_author`}
  * \date        `!v strftime('%d-%m-%y')`
  */
 
-class ${1:`!v expand('%:t:r')`} extends ${2: BaseController} {
+class $1 extends ${3: BaseController} {
     function __construct() {
+        ${4}
     }
     
     public function index() {
@@ -37,18 +38,18 @@ endsnippet
 #service service provider
 snippet l_ssp "Laravel service provider for service" b
 /*!
- * \namespace   $1
- * \class       $2
+ * \namespace   ${1:Services}
+ * \class       ${2:`!v expand('%:t:r')`}
  *
  * \author      ${3:`!v g:snips_author`}
  * \date        `!v strftime('%d-%m-%y')`
  */
 
-namespace ${1:Services};
+namespace $1;
 
 use Illuminate\Support\ServiceProvider;
 
-class ${2:`!v expand('%:t:r')`} extends ServiceProvider {
+class $2 extends ServiceProvider {
     
     public function register() {
         $this->app->bind('${4}Service', function ($app) {
@@ -63,20 +64,20 @@ endsnippet
 #repository service provider
 snippet l_rsp "Laravel service provider for repository" b
 /*!
- * \namespace   $2
- * \class       $3
+ * \namespace   ${2:Repositories\\${1:}}
+ * \class       ${3:`!v expand('%:t:r')`}
  *
  * \author      ${4:`!v g:snips_author`}
  * \date        `!v strftime('%d-%m-%y')`
  */
 
-namespace ${2:Repositories\\${1:}};
+namespace $2;
 
 use Entities\\$1;
 use $2\\$1Repository;
 use Illuminate\Support\ServiceProvider;
 
-class ${3:`!v expand('%:t:r')`} extends ServiceProvider {
+class $3 extends ServiceProvider {
     /*!
      * \var     defer
      * \brief   Defer service
@@ -101,16 +102,16 @@ endsnippet
 #model
 snippet l_md "Laravel simple model" b
 /*!
- * \namespace   $1
- * \class       $2
+ * \namespace   ${1:Entities}
+ * \class       ${2:`!v expand('%:t:r')`}
  *
  * \author      ${3:`!v g:snips_author`}
  * \date        `!v strftime('%d-%m-%y')`
  */
 
-namespace ${1:Entities};
+namespace $1;
 
-class ${2:`!v expand('%:t:r')`} extends \Eloquent {
+class $2 extends \Eloquent {
     protected $table   = '${4:`!p snip.rv = t[2].lower()`}';
 
     public $timestamps = ${5:false};
@@ -124,19 +125,19 @@ endsnippet
 #abstract repository
 snippet l_ar "Laravel abstract Repository" b
 /*!
- * \namespace   $1
- * \class       $2
- * \implements  $3
+ * \namespace   ${1:Repositories}
+ * \class       ${2:`!v expand('%:t:r')`}
+ * \implements  ${3:BaseRepositoryInterface}
  *
  * \author      ${4:`!v g:snips_author`}
  * \date        `!v strftime('%d-%m-%y')`
  */
 
-namespace ${1:Repositories};
+namespace $1;
 
 use Illuminate\Database\Eloquent\Model;
 
-abstract class ${2:`!v expand('%:t:r')`} implements ${3:BaseRepositoryInterface} {
+abstract class $2 implements $3 {
     protected $model;
 
     /*!
@@ -190,17 +191,17 @@ endsnippet
 #repository
 snippet l_r "Laravel Repository" b
 /*!
- * \namespace   $1
- * \class       $3
- * \implements  $4
+ * \namespace   ${1:Repositories\\${2}}
+ * \class       ${3:`!v expand('%:t:r')`}
+ * \implements  ${4:$3RepositoryInterface}
  *
  * \author      ${5:`!v g:snips_author`}
  * \date        `!v strftime('%d-%m-%y')`
  */
 
-namespace ${1:Repositories\\${2}};
+namespace $1;
 
-class ${3:`!v expand('%:t:r')`} extends \\${6} implements ${4:$3RepositoryInterface} {
+class $3 extends \\${6} implements $4 {
     ${7}
 }
 endsnippet
@@ -208,25 +209,25 @@ endsnippet
 #service
 snippet l_s "Laravel Service" b
 /*!
- * \namespace   $1
- * \class       $2
+ * \namespace   ${1:Services}
+ * \class       ${2:`!v expand('%:t:r')`}
  *
- * \author      ${6:`!v g:snips_author`}
+ * \author      ${3:`!v g:snips_author`}
  * \date        `!v strftime('%d-%m-%y')`
  */
 
-namespace Services\\${1};
+namespace $1;
 
-use ${3:Repositories\\${4:Interface}};
+use ${4:Repositories\\${5:Interface}};
 
-class ${2:`!v expand('%:t:r')`} {
-    protected $${5:repo};
+class $2 {
+    protected $${6:repo};
     
     /*!
      * \fn      __construct
      */
-    public function __construct($4 $repo) {
-        $this->$5 = $repo;
+    public function __construct($5 $repo) {
+        $this->$6 = $repo;
     }
 }
 endsnippet
@@ -234,23 +235,23 @@ endsnippet
 #facade
 snippet l_f "Laravel Facade" b
 /*!
- * \namespace   $1
- * \class       $2
+ * \namespace   ${1:Services}
+ * \class       ${2:`!v expand('%:t:r')`}
  *
- * \author      ${5:`!v g:snips_author`}
+ * \author      ${3:`!v g:snips_author`}
  * \date        `!v strftime('%d-%m-%y')`
  */
 
-namespace ${1:Services};
+namespace $1;
 
 use \Illuminate\Support\Facades\Facade;
 
-class ${2:`!v expand('%:t:r')`} extends Facade {
+class $2 extends Facade {
     /*!
      * \fn          getFacadeAccessor
      *
      * \return      string
      */
-    protected static function getFacadeAccessor() { return '${4:${3}Service}'; }
+    protected static function getFacadeAccessor() { return '${5:${4}Service}'; }
 }
 endsnippet
