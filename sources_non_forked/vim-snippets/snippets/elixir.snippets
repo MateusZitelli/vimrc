@@ -40,6 +40,14 @@ snippet case
 		${2} ->
 			${0}
 	end
+snippet for
+	for ${1:item} <- ${2:items} do
+		${0}
+	end
+snippet fori
+	for ${1:item} <- ${2:items}, into: ${3} do
+		${0}
+	end
 snippet df
 	def ${1:name}, do: ${2}
 snippet def
@@ -62,7 +70,7 @@ snippet defma
 		${0}
 	end
 snippet defmo
-	defmodule ${1:module_name} do
+	defmodule ${1:`substitute(vim_snippets#Filename(), '\(_\|^\)\(.\)', '\u\2', 'g')`} do
 		${0}
 	end
 snippet defp
@@ -89,8 +97,8 @@ snippet mdoc
 	"""
 snippet rec
 	receive do
-	${1} ->
-		${0}
+		${1} ->
+			${0}
 	end
 snippet req
 	require ${0:module_name}
@@ -115,3 +123,7 @@ snippet try try .. rescue .. end
 snippet pry
 	require IEx; IEx.pry
 	${0}
+snippet qu
+	quote do
+		${1}
+	end
