@@ -1,9 +1,12 @@
-set runtimepath+=~/.vim_runtime
+" Make Vim more useful. This should always be your first configuration line.
+set nocompatible
 
-source ~/.vim_runtime/vimrcs/basic.vim
-source ~/.vim_runtime/vimrcs/filetypes.vim
-source ~/.vim_runtime/vimrcs/plugins_config.vim
-source ~/.vim_runtime/vimrcs/extended.vim
+" Wraps paths to make them relative to this directory.
+function! Dot(path)
+  return '~/.config/nvim/' . a:path
+endfunction
 
-source ~/.vim_runtime/my_configs.vim
-
+" Load all configuration modules.
+for file in split(glob(Dot('modules/*.vim')), '\n')
+  execute 'source' file
+endfor
