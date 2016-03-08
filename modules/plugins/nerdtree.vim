@@ -8,3 +8,4 @@ map <leader>nb :NERDTreeFromBookmark
 map <leader>nf :NERDTreeFind<cr>
 " Add relative numbering in nerdtree
 autocmd FileType nerdtree setlocal relativenumber
+

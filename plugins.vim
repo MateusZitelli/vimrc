@@ -47,4 +47,6 @@ Plug 'walm/jshint.vim'
 Plug 'morhetz/gruvbox'
 Plug 'scrooloose/nerdtree'
 Plug 'jlanzarotta/bufexplorer'
-
+Plug 'terryma/vim-expand-region'
+Plug 'jeffkreeftmeijer/vim-numbertoggle'
+Plug 'editorconfig/editorconfig-vim'
